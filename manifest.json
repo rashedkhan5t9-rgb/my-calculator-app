@@ -1,0 +1,21 @@
+​{
+"name": "Price Calculator",
+"short_name": "Price Calc",
+"description": "A simple total price calculator as a PWA.",
+"start_url": "/my-calculator-app/calculator.html",
+"display": "standalone",
+"background_color": "#e6e2f5",
+"theme_color": "#8c73cc",
+"icons": [
+{
+"src": "https://www.google.com/search?q=https://placehold.co/192x192/8c73cc/ffffff%3Ftext%3DP",
+"sizes": "192x192",
+"type": "image/png"
+},
+{
+"src": "https://www.google.com/search?q=https://placehold.co/512x512/8c73cc/ffffff%3Ftext%3DP",
+"sizes": "512x512",
+"type": "image/png"
+}
+]
+}
