@@ -3,185 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pastel Price Calculator</title>
-    <meta name="description" content="A simple, offline total price calculator for contractors and designers.">
-    <meta name="theme-color" content="#e6e6f5">
-
-    <!-- Web App Manifest -->
-    <link rel="manifest" href="/manifest.json">
-    
-    <!-- Tailwind CSS CDN for styling -->
+    <title>Total Price Calculator</title>
+    <link rel="manifest" href="manifest.json">
     <script src="https://cdn.tailwindcss.com"></script>
-
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f7f7f9; /* Light gray background */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 1rem;
-            color: #333;
+            background-color: #f0f4f8;
         }
-
         .calculator-card {
-            background-color: #e6e6f5; /* Light purple */
-            border-radius: 2rem;
-            box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1), -10px -10px 20px #ffffff;
-            padding: 2.5rem 1.5rem;
-            width: 100%;
-            max-width: 400px;
-            box-sizing: border-box;
-            border: 1px solid #d4d4e6;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
+            background: linear-gradient(145deg, #e6e9f0, #d5d9e0);
+            box-shadow: 10px 10px 20px #b7b9c1, -10px -10px 20px #ffffff;
+        }
+        .input-group input {
+            box-shadow: inset 5px 5px 10px #bec3cc, inset -5px -5px 10px #ffffff;
+            /* Added padding-left and increased height for better aesthetics and usability */
+            padding-left: 1.5rem;
+            height: 3.5rem; 
+        }
+        .calculate-btn {
+            background: linear-gradient(145deg, #a060e0, #8a48c6);
+            box-shadow: 5px 5px 10px #9453d1, -5px -5px 10px #a467e4;
+        }
+        .calculate-btn:hover {
+            background: linear-gradient(145deg, #8a48c6, #a060e0);
+        }
+        .result-box {
+            background: linear-gradient(145deg, #e6e9f0, #d5d9e0);
+            box-shadow: inset 5px 5px 10px #bec3cc, inset -5px -5px 10px #ffffff;
+        }
+        /* Style for the number input spinner buttons to hide them */
+        input[type=number]::-webkit-outer-spin-button,
+        input[type=number]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
         }
 
-        h1 {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: #4a4a8a; /* Darker purple */
-            text-align: center;
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+        .title {
+          color: #3b3b3b;
+          font-weight: 700;
         }
 
         .subtitle {
-            font-size: 0.875rem;
-            color: #888;
-            text-align: center;
-            margin-top: -1rem;
-        }
-
-        .input-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        label {
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: #6a6a9a; /* Muted purple */
-            text-align: left;
-        }
-
-        input {
-            width: 100%;
-            padding: 1rem;
-            height: 3.25rem; /* Consistent height for all inputs */
-            border-radius: 0.75rem;
-            background-color: #f0f0f8;
-            border: none;
-            box-shadow: inset 3px 3px 8px rgba(0, 0, 0, 0.05), inset -3px -3px 8px #ffffff;
-            color: #333;
-            font-size: 1rem;
-            transition: all 0.2s ease-in-out;
-            box-sizing: border-box;
-        }
-
-        input:focus {
-            outline: none;
-            box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1), inset -2px -2px 5px #ffffff;
-        }
-
-        .calculate-button {
-            width: 100%;
-            padding: 1rem;
-            border-radius: 9999px;
-            background-color: #9b9bef; /* Pastel blue-purple */
-            color: white;
-            font-size: 1.25rem;
-            font-weight: 700;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 8px 16px rgba(155, 155, 239, 0.5);
-            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-        }
-
-        .calculate-button:hover {
-            box-shadow: 0 6px 12px rgba(155, 155, 239, 0.6);
-            transform: translateY(-2px);
-        }
-
-        .calculate-button:active {
-            transform: translateY(0);
-            box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.2);
-        }
-
-        .result-display {
-            margin-top: 1rem;
-            padding: 1.5rem;
-            border-radius: 1rem;
-            background-color: #f0f0f8;
-            box-shadow: inset 4px 4px 10px rgba(0, 0, 0, 0.05), inset -4px -4px 10px #ffffff;
-            text-align: center;
-            border: 1px solid #e0e0f0;
-        }
-
-        .result-label {
-            font-size: 1rem;
-            color: #6a6a9a;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-
-        #totalPriceText {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #4a4a8a;
-            word-wrap: break-word;
-            line-height: 1.2;
+          color: #7b7b7b;
+          font-weight: 500;
         }
     </style>
 </head>
-<body>
-    <div class="calculator-card">
-        <h1>Total Price Calculator</h1>
-        <p class="subtitle">Enter dimensions to get the total cost</p>
+<body class="flex items-center justify-center min-h-screen p-4">
 
-        <div class="input-group">
-            <label for="width">Width (cm)</label>
-            <input type="number" id="width" placeholder="Enter width">
+    <div class="calculator-card p-8 rounded-3xl w-full max-w-sm flex flex-col items-center">
+        <h1 class="text-3xl font-bold mb-2 text-center title">Total Price Calculator</h1>
+        <p class="text-sm text-center mb-6 subtitle">Enter dimensions to get the total cost</p>
+
+        <div class="w-full space-y-4">
+            <div class="input-group">
+                <input type="number" id="width" placeholder="Width (cm)" class="w-full rounded-2xl p-4 bg-transparent outline-none transition-all duration-300 focus:ring-2 focus:ring-purple-500">
+            </div>
+            <div class="input-group">
+                <input type="number" id="height" placeholder="Height (cm)" class="w-full rounded-2xl p-4 bg-transparent outline-none transition-all duration-300 focus:ring-2 focus:ring-purple-500">
+            </div>
+            <div class="input-group">
+                <input type="number" id="quantity" placeholder="Quantity" class="w-full rounded-2xl p-4 bg-transparent outline-none transition-all duration-300 focus:ring-2 focus:ring-purple-500">
+            </div>
+            <div class="input-group">
+                <input type="number" id="unitPrice" placeholder="Unit Price (AED/m²)" class="w-full rounded-2xl p-4 bg-transparent outline-none transition-all duration-300 focus:ring-2 focus:ring-purple-500">
+            </div>
         </div>
 
-        <div class="input-group">
-            <label for="height">Height (cm)</label>
-            <input type="number" id="height" placeholder="Enter height">
-        </div>
-
-        <div class="input-group">
-            <label for="quantity">Quantity</label>
-            <input type="number" id="quantity" placeholder="Enter quantity">
-        </div>
-
-        <div class="input-group">
-            <label for="unitPrice">Unit Price (AED/m²)</label>
-            <input type="number" id="unitPrice" placeholder="Enter unit price">
-        </div>
-
-        <button class="calculate-button" onclick="calculate()">Calculate</button>
-
-        <div class="result-display">
-            <div class="result-label">Total Price</div>
-            <div id="totalPriceText">0.00 AED</div>
+        <button onclick="calculatePrice()" class="calculate-btn text-white font-semibold py-4 rounded-full w-full mt-8 transition-all duration-300">
+            Calculate
+        </button>
+        
+        <div id="resultBox" class="result-box w-full rounded-2xl mt-8 py-6 px-4 text-center text-lg font-bold text-gray-800 hidden">
+            <span id="resultText"></span>
         </div>
     </div>
 
     <script>
-        function calculate() {
-            const width = parseFloat(document.getElementById('width').value) || 0;
-            const height = parseFloat(document.getElementById('height').value) || 0;
-            const quantity = parseFloat(document.getElementById('quantity').value) || 0;
-            const unitPrice = parseFloat(document.getElementById('unitPrice').value) || 0;
+        // Register the service worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then(registration => {
+                        console.log('Service Worker registered with scope:', registration.scope);
+                    })
+                    .catch(error => {
+                        console.error('Service Worker registration failed:', error);
+                    });
+            });
+        }
 
-            const areaInSqMeters = (width * height) / 10000;
-            const totalPrice = areaInSqMeters * quantity * unitPrice;
+        function calculatePrice() {
+            const width = parseFloat(document.getElementById('width').value);
+            const height = parseFloat(document.getElementById('height').value);
+            const quantity = parseFloat(document.getElementById('quantity').value);
+            const unitPrice = parseFloat(document.getElementById('unitPrice').value);
 
-            document.getElementById('totalPriceText').innerText = `${totalPrice.toFixed(2)} AED`;
+            if (isNaN(width) || isNaN(height) || isNaN(quantity) || isNaN(unitPrice)) {
+                showMessage("Please enter valid numbers in all fields.");
+                return;
+            }
+
+            const areaInSqM = (width / 100) * (height / 100);
+            const totalPrice = areaInSqM * quantity * unitPrice;
+
+            showMessage(`The total price is: **${totalPrice.toFixed(2)} AED**`);
+        }
+
+        function showMessage(message) {
+            const resultBox = document.getElementById('resultBox');
+            const resultText = document.getElementById('resultText');
+            resultText.innerHTML = message;
+            resultBox.classList.remove('hidden');
         }
     </script>
+
 </body>
 </html>
