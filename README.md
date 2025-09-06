@@ -1,2 +1,2 @@
 # my-calculator-app
-A simple BMI and mortgage calculator
+A simple total price calculator
